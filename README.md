@@ -101,9 +101,23 @@ dev.bat server
 
 ### 客户端
 1. 在Unity中打开`unity/`目录
-2. 导入WebSocketSharp包
-3. 配置服务器地址
-4. 运行场景
+2. 运行开发脚本设置软链接：
+   - Windows: `dev.bat setup` 或 `dev.bat symlinks`
+   - PowerShell: `.\dev.ps1 setup` 或 `.\dev.ps1 symlinks`
+   - Linux: `./setup-symlinks.sh`
+3. Unity会自动创建到共享代码的软链接，如果失败会尝试复制文件
+4. 导入WebSocketSharp包（已在Packages/manifest.json中配置）
+5. 配置服务器地址
+6. 运行场景
+
+### 共享代码设置
+项目使用符号链接将Unity客户端与服务器共享代码连接：
+- **自动设置**: Unity编辑器脚本会在编译时自动检查并创建软链接
+- **手动设置**: 
+  - Windows: 运行 `setup-symlinks.bat`（需要管理员权限）
+  - Linux/Mac: 运行 `setup-symlinks.sh`
+- **软链接位置**: `unity/Assets/Scripts/Shared/FiveElements.Shared` -> `src/FiveElements.Shared`
+- **程序集**: Unity使用程序集定义文件管理依赖关系
 
 ## API接口
 
@@ -169,17 +183,19 @@ dev.bat server
 ### Windows开发脚本
 
 #### 批处理文件 (Command Prompt)
-- `dev.bat setup` - 设置开发环境
+- `dev.bat setup` - 设置开发环境（包括软链接）
 - `dev.bat build` - 构建解决方案
 - `dev.bat server` - 启动服务器
 - `dev.bat test` - 运行测试
+- `dev.bat symlinks` - 设置Unity软链接
 - `test-server.bat` - 测试服务器连接
 
 #### PowerShell脚本
-- `.\dev.ps1 setup` - 设置开发环境
+- `.\dev.ps1 setup` - 设置开发环境（包括软链接）
 - `.\dev.ps1 build` - 构建解决方案
 - `.\dev.ps1 server` - 启动服务器
 - `.\dev.ps1 test` - 运行测试
+- `.\dev.ps1 symlinks` - 设置Unity软链接
 - `.\dev.ps1 help` - 显示帮助信息
 
 ### 构建命令

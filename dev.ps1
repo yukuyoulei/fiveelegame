@@ -5,7 +5,7 @@ Write-Host "=========================================" -ForegroundColor Cyan
 
 param(
     [Parameter(Mandatory=$false)]
-    [ValidateSet("setup", "build", "server", "test", "help")]
+    [ValidateSet("setup", "build", "server", "test", "symlinks", "help")]
     [string]$Command = "help"
 )
 
@@ -17,6 +17,9 @@ switch ($Command) {
         
         Write-Host "Building solution..." -ForegroundColor Yellow
         dotnet build
+        
+        Write-Host "Setting up Unity symbolic links..." -ForegroundColor Yellow
+        & .\setup-symlinks.bat
         
         Write-Host "Development environment setup complete!" -ForegroundColor Green
     }
@@ -39,6 +42,11 @@ switch ($Command) {
         dotnet test
     }
     
+    "symlinks" {
+        Write-Host "Setting up Unity symbolic links..." -ForegroundColor Green
+        & .\setup-symlinks.bat
+    }
+    
     "help" {
         Write-Host "Usage: .\dev.ps1 [COMMAND]" -ForegroundColor Cyan
         Write-Host ""
@@ -47,6 +55,7 @@ switch ($Command) {
         Write-Host "  build      - Build the solution" -ForegroundColor Gray
         Write-Host "  server     - Start the server" -ForegroundColor Gray
         Write-Host "  test       - Run tests" -ForegroundColor Gray
+        Write-Host "  symlinks   - Setup Unity symbolic links" -ForegroundColor Gray
         Write-Host "  help       - Show this help message" -ForegroundColor Gray
     }
 }

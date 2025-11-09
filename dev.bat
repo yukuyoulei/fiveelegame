@@ -8,6 +8,7 @@ if "%1"=="setup" goto setup
 if "%1"=="build" goto build
 if "%1"=="server" goto server
 if "%1"=="test" goto test
+if "%1"=="symlinks" goto symlinks
 goto help
 
 :setup
@@ -16,6 +17,8 @@ echo Installing .NET dependencies...
 dotnet restore
 echo Building solution...
 dotnet build
+echo Setting up Unity symbolic links...
+call setup-symlinks.bat
 echo Development environment setup complete!
 goto end
 
@@ -37,6 +40,11 @@ echo Running tests...
 dotnet test
 goto end
 
+:symlinks
+echo Setting up Unity symbolic links...
+call setup-symlinks.bat
+goto end
+
 :help
 echo Usage: %0 [COMMAND]
 echo.
@@ -45,6 +53,7 @@ echo   setup      - Setup development environment
 echo   build      - Build the solution
 echo   server     - Start the server
 echo   test       - Run tests
+echo   symlinks   - Setup Unity symbolic links
 echo   help       - Show this help message
 
 :end
