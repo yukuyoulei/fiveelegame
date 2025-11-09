@@ -89,9 +89,14 @@
 ## 快速开始
 
 ### 服务器端
-```bash
-cd src/FiveElements.Server
+```cmd
+cd src\FiveElements.Server
 dotnet run
+```
+
+或者使用开发脚本：
+```cmd
+dev.bat server
 ```
 
 ### 客户端
@@ -158,6 +163,31 @@ dotnet run
 - [ ] 装备和道具系统
 - [ ] 副本和Boss战
 - [ ] 移动端支持
+
+## 开发工具
+
+### Windows开发脚本
+
+#### 批处理文件 (Command Prompt)
+- `dev.bat setup` - 设置开发环境
+- `dev.bat build` - 构建解决方案
+- `dev.bat server` - 启动服务器
+- `dev.bat test` - 运行测试
+- `test-server.bat` - 测试服务器连接
+
+#### PowerShell脚本
+- `.\dev.ps1 setup` - 设置开发环境
+- `.\dev.ps1 build` - 构建解决方案
+- `.\dev.ps1 server` - 启动服务器
+- `.\dev.ps1 test` - 运行测试
+- `.\dev.ps1 help` - 显示帮助信息
+
+### 构建命令
+```cmd
+dotnet build                    # 构建整个解决方案
+dotnet run --project src/FiveElements.Server  # 启动服务器
+dotnet test                     # 运行所有测试
+```
 
 ## 贡献指南
 
