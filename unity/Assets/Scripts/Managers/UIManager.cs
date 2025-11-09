@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using FiveElements.Shared.Models;
+using FiveElements.Shared;
 
 namespace FiveElements.Unity.Managers
 {

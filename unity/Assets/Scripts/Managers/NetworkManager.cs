@@ -3,7 +3,7 @@ using System.Collections;
 using System.Text;
 using WebSocketSharp;
 using FiveElements.Shared.Messages;
-using FiveElements.Shared.Models;
+using FiveElements.Shared;
 
 namespace FiveElements.Unity.Managers
 {
