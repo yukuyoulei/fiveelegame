@@ -43,23 +43,37 @@ namespace FiveElements.Unity.UI
         private void SetupButtons()
         {
             // Training buttons
-            TrainBodyMetalButton.onClick.AddListener(() => GameManager.Instance.OnTrainBodyClicked(ElementType.Metal));
-            TrainBodyWoodButton.onClick.AddListener(() => GameManager.Instance.OnTrainBodyClicked(ElementType.Wood));
-            TrainBodyWaterButton.onClick.AddListener(() => GameManager.Instance.OnTrainBodyClicked(ElementType.Water));
-            TrainBodyFireButton.onClick.AddListener(() => GameManager.Instance.OnTrainBodyClicked(ElementType.Fire));
-            TrainBodyEarthButton.onClick.AddListener(() => GameManager.Instance.OnTrainBodyClicked(ElementType.Earth));
+            if (TrainBodyMetalButton != null)
+                TrainBodyMetalButton.onClick.AddListener(() => GameManager.Instance.OnTrainBodyClicked(ElementType.Metal));
+            if (TrainBodyWoodButton != null)
+                TrainBodyWoodButton.onClick.AddListener(() => GameManager.Instance.OnTrainBodyClicked(ElementType.Wood));
+            if (TrainBodyWaterButton != null)
+                TrainBodyWaterButton.onClick.AddListener(() => GameManager.Instance.OnTrainBodyClicked(ElementType.Water));
+            if (TrainBodyFireButton != null)
+                TrainBodyFireButton.onClick.AddListener(() => GameManager.Instance.OnTrainBodyClicked(ElementType.Fire));
+            if (TrainBodyEarthButton != null)
+                TrainBodyEarthButton.onClick.AddListener(() => GameManager.Instance.OnTrainBodyClicked(ElementType.Earth));
             
-            TrainMindMetalButton.onClick.AddListener(() => GameManager.Instance.OnTrainMindClicked(ElementType.Metal));
-            TrainMindWoodButton.onClick.AddListener(() => GameManager.Instance.OnTrainMindClicked(ElementType.Wood));
-            TrainMindWaterButton.onClick.AddListener(() => GameManager.Instance.OnTrainMindClicked(ElementType.Water));
-            TrainMindFireButton.onClick.AddListener(() => GameManager.Instance.OnTrainMindClicked(ElementType.Fire));
-            TrainMindEarthButton.onClick.AddListener(() => GameManager.Instance.OnTrainMindClicked(ElementType.Earth));
+            if (TrainMindMetalButton != null)
+                TrainMindMetalButton.onClick.AddListener(() => GameManager.Instance.OnTrainMindClicked(ElementType.Metal));
+            if (TrainMindWoodButton != null)
+                TrainMindWoodButton.onClick.AddListener(() => GameManager.Instance.OnTrainMindClicked(ElementType.Wood));
+            if (TrainMindWaterButton != null)
+                TrainMindWaterButton.onClick.AddListener(() => GameManager.Instance.OnTrainMindClicked(ElementType.Water));
+            if (TrainMindFireButton != null)
+                TrainMindFireButton.onClick.AddListener(() => GameManager.Instance.OnTrainMindClicked(ElementType.Fire));
+            if (TrainMindEarthButton != null)
+                TrainMindEarthButton.onClick.AddListener(() => GameManager.Instance.OnTrainMindClicked(ElementType.Earth));
 
             // Movement buttons
-            MoveUpButton.onClick.AddListener(() => GameManager.Instance.OnMoveUpClicked());
-            MoveDownButton.onClick.AddListener(() => GameManager.Instance.OnMoveDownClicked());
-            MoveLeftButton.onClick.AddListener(() => GameManager.Instance.OnMoveLeftClicked());
-            MoveRightButton.onClick.AddListener(() => GameManager.Instance.OnMoveRightClicked());
+            if (MoveUpButton != null)
+                MoveUpButton.onClick.AddListener(() => GameManager.Instance.OnMoveUpClicked());
+            if (MoveDownButton != null)
+                MoveDownButton.onClick.AddListener(() => GameManager.Instance.OnMoveDownClicked());
+            if (MoveLeftButton != null)
+                MoveLeftButton.onClick.AddListener(() => GameManager.Instance.OnMoveLeftClicked());
+            if (MoveRightButton != null)
+                MoveRightButton.onClick.AddListener(() => GameManager.Instance.OnMoveRightClicked());
         }
 
         public void UpdateStats(PlayerStats playerStats)

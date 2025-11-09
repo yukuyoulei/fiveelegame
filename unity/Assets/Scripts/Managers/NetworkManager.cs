@@ -67,7 +67,7 @@ namespace FiveElements.Unity.Managers
                 if (message == null) return;
 
                 // Handle messages on main thread
-                UnityMainThreadDispatcher.Instance().Enqueue(() =>
+                UnityMainThreadDispatcher.Instance.Enqueue(() =>
                 {
                     switch (message.Type)
                     {
@@ -159,19 +159,22 @@ namespace FiveElements.Unity.Managers
         private static readonly System.Collections.Concurrent.ConcurrentQueue<System.Action> _executionQueue = new System.Collections.Concurrent.ConcurrentQueue<System.Action>();
         private static UnityMainThreadDispatcher _instance = null;
 
-        public static UnityMainThreadDispatcher Instance()
+        public static UnityMainThreadDispatcher Instance
         {
-            if (_instance == null)
+            get
             {
-                _instance = FindObjectOfType<UnityMainThreadDispatcher>();
                 if (_instance == null)
                 {
-                    var go = new GameObject("UnityMainThreadDispatcher");
-                    _instance = go.AddComponent<UnityMainThreadDispatcher>();
-                    DontDestroyOnLoad(go);
+                    _instance = FindObjectOfType<UnityMainThreadDispatcher>();
+                    if (_instance == null)
+                    {
+                        var go = new GameObject("UnityMainThreadDispatcher");
+                        _instance = go.AddComponent<UnityMainThreadDispatcher>();
+                        DontDestroyOnLoad(go);
+                    }
                 }
+                return _instance;
             }
-            return _instance;
         }
 
         void Update()

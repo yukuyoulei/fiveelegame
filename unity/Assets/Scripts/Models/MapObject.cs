@@ -10,14 +10,15 @@ namespace FiveElements.Shared.Models
         Monster
     }
 
+    [System.Serializable]
     public class MapObject
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
-        public MapObjectType Type { get; set; }
-        public ElementType? ElementType { get; set; }
+        public MapObjectType Type { get; set; } = MapObjectType.Empty;
+        public ElementType ElementType { get; set; } = ElementType.None;
         public int Level { get; set; } = 1;
-        public int Value { get; set; }
-        public int MaxValue { get; set; }
+        public int Value { get; set; } = 0;
+        public int MaxValue { get; set; } = 100;
         public DateTime LastRegen { get; set; } = DateTime.UtcNow;
         public Position Position { get; set; } = new Position(0, 0);
 
@@ -51,11 +52,12 @@ namespace FiveElements.Shared.Models
         }
     }
 
+    [System.Serializable]
     public class Monster : MapObject
     {
-        public ElementType MonsterElement { get; set; }
-        public int Health { get; set; }
-        public int MaxHealth { get; set; }
+        public ElementType MonsterElement { get; set; } = ElementType.None;
+        public int Health { get; set; } = 100;
+        public int MaxHealth { get; set; } = 100;
         public DateTime LastMove { get; set; } = DateTime.UtcNow;
         public DateTime LastEvolution { get; set; } = DateTime.UtcNow;
 
