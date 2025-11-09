@@ -1,7 +1,8 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
-using FiveElements.Shared.Models;
+using FiveElements.Shared;
 using FiveElements.Shared.Messages;
 
 namespace FiveElements.Unity.Managers
@@ -18,16 +19,16 @@ namespace FiveElements.Unity.Managers
         [Header("UI References")]
         public GameObject MainElementSelectionPanel;
         public GameObject GameHUD;
-        public UnityEngine.UI.Text StaminaText;
-        public UnityEngine.UI.Text MetalText;
-        public UnityEngine.UI.Text WoodText;
-        public UnityEngine.UI.Text WaterText;
-        public UnityEngine.UI.Text FireText;
-        public UnityEngine.UI.Text EarthText;
-        public UnityEngine.UI.Button MoveUpButton;
-        public UnityEngine.UI.Button MoveDownButton;
-        public UnityEngine.UI.Button MoveLeftButton;
-        public UnityEngine.UI.Button MoveRightButton;
+        public Text StaminaText;
+        public Text MetalText;
+        public Text WoodText;
+        public Text WaterText;
+        public Text FireText;
+        public Text EarthText;
+        public Button MoveUpButton;
+        public Button MoveDownButton;
+        public Button MoveLeftButton;
+        public Button MoveRightButton;
         
         private NetworkManager _networkManager;
         private UIManager _uiManager;

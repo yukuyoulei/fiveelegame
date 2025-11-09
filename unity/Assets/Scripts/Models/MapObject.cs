@@ -1,4 +1,5 @@
 using System;
+using FiveElements.Shared;
 
 namespace FiveElements.Shared.Models
 {
