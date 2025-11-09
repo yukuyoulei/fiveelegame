@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Text;
-using System.Text.Json;
 using WebSocketSharp;
 using FiveElements.Shared.Messages;
 using FiveElements.Shared.Models;
@@ -64,7 +63,7 @@ namespace FiveElements.Unity.Managers
         {
             try
             {
-                var message = JsonSerializer.Deserialize<MessageBase>(messageJson);
+                var message = JsonUtility.FromJson<MessageBase>(messageJson);
                 if (message == null) return;
 
                 // Handle messages on main thread
@@ -73,47 +72,47 @@ namespace FiveElements.Unity.Managers
                     switch (message.Type)
                     {
                         case nameof(WelcomeMessage):
-                            var welcomeMsg = JsonSerializer.Deserialize<WelcomeMessage>(messageJson);
+                            var welcomeMsg = JsonUtility.FromJson<WelcomeMessage>(messageJson);
                             GameManager.Instance.OnWelcomeMessageReceived(welcomeMsg!);
                             break;
                             
                         case nameof(MapUpdateMessage):
-                            var mapMsg = JsonSerializer.Deserialize<MapUpdateMessage>(messageJson);
+                            var mapMsg = JsonUtility.FromJson<MapUpdateMessage>(messageJson);
                             GameManager.Instance.OnMapUpdateReceived(mapMsg!);
                             break;
                             
                         case nameof(PlayerStatsUpdateMessage):
-                            var statsMsg = JsonSerializer.Deserialize<PlayerStatsUpdateMessage>(messageJson);
+                            var statsMsg = JsonUtility.FromJson<PlayerStatsUpdateMessage>(messageJson);
                             GameManager.Instance.OnPlayerStatsUpdated(statsMsg!);
                             break;
                             
                         case nameof(TrainingResultMessage):
-                            var trainingMsg = JsonSerializer.Deserialize<TrainingResultMessage>(messageJson);
+                            var trainingMsg = JsonUtility.FromJson<TrainingResultMessage>(messageJson);
                             GameManager.Instance.OnTrainingResultReceived(trainingMsg!);
                             break;
                             
                         case nameof(HarvestResultMessage):
-                            var harvestMsg = JsonSerializer.Deserialize<HarvestResultMessage>(messageJson);
+                            var harvestMsg = JsonUtility.FromJson<HarvestResultMessage>(messageJson);
                             GameManager.Instance.OnHarvestResultReceived(harvestMsg!);
                             break;
                             
                         case nameof(AttackResultMessage):
-                            var attackMsg = JsonSerializer.Deserialize<AttackResultMessage>(messageJson);
+                            var attackMsg = JsonUtility.FromJson<AttackResultMessage>(messageJson);
                             GameManager.Instance.OnAttackResultReceived(attackMsg!);
                             break;
                             
                         case nameof(PlayerJoinedMessage):
-                            var joinMsg = JsonSerializer.Deserialize<PlayerJoinedMessage>(messageJson);
+                            var joinMsg = JsonUtility.FromJson<PlayerJoinedMessage>(messageJson);
                             GameManager.Instance.OnPlayerJoined(joinMsg!);
                             break;
                             
                         case nameof(PlayerLeftMessage):
-                            var leaveMsg = JsonSerializer.Deserialize<PlayerLeftMessage>(messageJson);
+                            var leaveMsg = JsonUtility.FromJson<PlayerLeftMessage>(messageJson);
                             GameManager.Instance.OnPlayerLeft(leaveMsg!);
                             break;
                             
                         case nameof(ErrorMessage):
-                            var errorMsg = JsonSerializer.Deserialize<ErrorMessage>(messageJson);
+                            var errorMsg = JsonUtility.FromJson<ErrorMessage>(messageJson);
                             GameManager.Instance.OnError(errorMsg!);
                             break;
                     }
@@ -135,7 +134,7 @@ namespace FiveElements.Unity.Managers
 
             try
             {
-                var messageJson = JsonSerializer.Serialize(message);
+                var messageJson = JsonUtility.ToJson(message);
                 _webSocket.SendAsync(messageJson);
             }
             catch (System.Exception ex)
