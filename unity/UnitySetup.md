@@ -98,13 +98,13 @@ private const string ServerUrl = "ws://your-server-url:5000/ws";
 
 1. Go to File → Build Settings
 2. Add MainGame scene to build
-3. Select target platform (Windows, Mac, Linux, etc.)
+3. Select target platform (Windows)
 4. Configure build settings
 5. Build and run
 
 ## Testing
 
-1. Start the server: `./dev.sh server`
+1. Start the server: `dev.bat server`
 2. Run the Unity client
 3. Enter player name and select main element
 4. Test movement, harvesting, and combat

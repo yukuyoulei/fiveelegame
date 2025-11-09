@@ -2,20 +2,20 @@
 
 ## 🚀 Run the Game Server
 
-### Option 1: Using Development Script
-```bash
-./dev.sh server
+### Option 1: Using Development Script (Batch)
+```cmd
+dev.bat server
 ```
 
-### Option 2: Direct .NET Command
-```bash
-cd src/FiveElements.Server
+### Option 2: Using Development Script (PowerShell)
+```powershell
+.\dev.ps1 server
+```
+
+### Option 3: Direct .NET Command
+```cmd
+cd src\FiveElements.Server
 dotnet run
-```
-
-### Option 3: Docker
-```bash
-docker-compose up
 ```
 
 ## 🎮 Run the Unity Client
@@ -30,7 +30,7 @@ docker-compose up
 ## 🧪 Test the System
 
 ### Test Server API
-```bash
+```cmd
 curl http://localhost:5000/api/game/players
 ```
 
@@ -44,8 +44,9 @@ FiveElements/
 │   ├── FiveElements.Shared/     # Shared game logic
 │   └── FiveElements.Server/    # ASP.NET Core server
 ├── unity/                     # Unity client assets
-├── dev.sh                     # Development helper script
-├── docker-compose.yml          # Docker deployment
+├── dev.bat                    # Windows batch script
+├── dev.ps1                    # Windows PowerShell script
+├── test-server.bat           # Windows test script
 └── README.md                  # Full documentation
 ```
 
@@ -59,7 +60,7 @@ FiveElements/
 - ✅ Stamina system with auto-regeneration
 
 ## 🔧 Development Tips
-- Use `./dev.sh setup` to install dependencies
+- Use `dev.bat setup` or `.\dev.ps1 setup` to install dependencies
 - Server logs show connection activity
 - Unity console shows client-side errors
 - Check `appsettings.json` for configuration options
@@ -69,6 +70,7 @@ FiveElements/
 - **WebSocket connection failed**: Check firewall and URL
 - **Build errors**: Run `dotnet clean && dotnet build`
 - **Unity package errors**: Reinstall WebSocketSharp
+- **PowerShell execution policy**: Run `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
 
 ## 📚 Documentation
 - Full documentation: `README.md`
