@@ -2,6 +2,7 @@ using System;
 
 namespace FiveElements.Shared.Models
 {
+    [System.Serializable]
     public class PlayerStats
     {
         public string PlayerId { get; set; } = string.Empty;

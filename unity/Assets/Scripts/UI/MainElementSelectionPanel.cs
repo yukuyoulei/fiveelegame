@@ -23,22 +23,36 @@ namespace FiveElements.Unity.UI
 
         private void SetupButtons()
         {
-            MetalButton.onClick.AddListener(() => SelectElement(ElementType.Metal));
-            WoodButton.onClick.AddListener(() => SelectElement(ElementType.Wood));
-            WaterButton.onClick.AddListener(() => SelectElement(ElementType.Water));
-            FireButton.onClick.AddListener(() => SelectElement(ElementType.Fire));
-            EarthButton.onClick.AddListener(() => SelectElement(ElementType.Earth));
-            
-            MetalButton.onClick.AddListener(() => ShowDescription(ElementType.Metal));
-            WoodButton.onClick.AddListener(() => ShowDescription(ElementType.Wood));
-            WaterButton.onClick.AddListener(() => ShowDescription(ElementType.Water));
-            FireButton.onClick.AddListener(() => ShowDescription(ElementType.Fire));
-            EarthButton.onClick.AddListener(() => ShowDescription(ElementType.Earth));
+            if (MetalButton != null)
+            {
+                MetalButton.onClick.AddListener(() => SelectElement(ElementType.Metal));
+                MetalButton.onClick.AddListener(() => ShowDescription(ElementType.Metal));
+            }
+            if (WoodButton != null)
+            {
+                WoodButton.onClick.AddListener(() => SelectElement(ElementType.Wood));
+                WoodButton.onClick.AddListener(() => ShowDescription(ElementType.Wood));
+            }
+            if (WaterButton != null)
+            {
+                WaterButton.onClick.AddListener(() => SelectElement(ElementType.Water));
+                WaterButton.onClick.AddListener(() => ShowDescription(ElementType.Water));
+            }
+            if (FireButton != null)
+            {
+                FireButton.onClick.AddListener(() => SelectElement(ElementType.Fire));
+                FireButton.onClick.AddListener(() => ShowDescription(ElementType.Fire));
+            }
+            if (EarthButton != null)
+            {
+                EarthButton.onClick.AddListener(() => SelectElement(ElementType.Earth));
+                EarthButton.onClick.AddListener(() => ShowDescription(ElementType.Earth));
+            }
         }
 
         private void SelectElement(ElementType element)
         {
-            var playerName = string.IsNullOrEmpty(PlayerNameInput.text) ? "Player" : PlayerNameInput.text;
+            var playerName = (PlayerNameInput != null && !string.IsNullOrEmpty(PlayerNameInput.text)) ? PlayerNameInput.text : "Player";
             GameManager.Instance.SelectMainElement(element, playerName);
         }
 

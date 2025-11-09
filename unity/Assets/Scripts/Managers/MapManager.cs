@@ -53,17 +53,21 @@ namespace FiveElements.Unity.Managers
 
         private void CreateTile(MapCell cell, Position centerPosition)
         {
+            if (TilePrefab == null || MapContainer == null) return;
+            
             var worldX = (cell.Position.X - centerPosition.X) * TileSize;
             var worldY = (cell.Position.Y - centerPosition.Y) * TileSize;
             
             var tile = Instantiate(TilePrefab, MapContainer);
             tile.transform.position = new Vector3(worldX, worldY, 0);
             
+            // Ensure the tile has a SpriteRenderer
             var tileRenderer = tile.GetComponent<SpriteRenderer>();
-            if (tileRenderer != null)
+            if (tileRenderer == null)
             {
-                tileRenderer.color = GetTileColor(cell);
+                tileRenderer = tile.AddComponent<SpriteRenderer>();
             }
+            tileRenderer.color = GetTileColor(cell);
             
             // Add tile script for interaction
             var tileScript = tile.AddComponent<MapTile>();
@@ -99,6 +103,8 @@ namespace FiveElements.Unity.Managers
 
         private void DrawPlayer(PlayerInfo player, Position centerPosition)
         {
+            if (MapContainer == null) return;
+            
             var worldX = (player.Position.X - centerPosition.X) * TileSize;
             var worldY = (player.Position.Y - centerPosition.Y) * TileSize;
             

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using FiveElements.Shared;
 using FiveElements.Shared.Messages;
+using FiveElements.Unity.UI;
 
 namespace FiveElements.Unity.Managers
 {
@@ -197,10 +198,10 @@ namespace FiveElements.Unity.Managers
         }
 
         // Button click handlers
-        public void OnMoveUpClicked() => MovePlayer(0, 1);
-        public void OnMoveDownClicked() => MovePlayer(0, -1);
-        public void OnMoveLeftClicked() => MovePlayer(-1, 0);
-        public void OnMoveRightClicked() => MovePlayer(1, 0);
+        public void OnMoveUpClicked() { MovePlayer(0, 1); }
+        public void OnMoveDownClicked() { MovePlayer(0, -1); }
+        public void OnMoveLeftClicked() { MovePlayer(-1, 0); }
+        public void OnMoveRightClicked() { MovePlayer(1, 0); }
 
         private void MovePlayer(int directionX, int directionY)
         {

@@ -2,6 +2,7 @@ using System;
 
 namespace FiveElements.Shared.Models
 {
+    [System.Serializable]
     public class Position
     {
         public int X { get; set; }

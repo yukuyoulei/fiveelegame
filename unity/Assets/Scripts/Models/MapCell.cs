@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 namespace FiveElements.Shared.Models
 {
+    [System.Serializable]
     public class MapCell
     {
         public Position Position { get; set; } = new Position(0, 0);
-        public MapObject? Object { get; set; }
+        public MapObject Object { get; set; }
         public List<string> PlayerIds { get; set; } = new List<string>();
         public bool IsExplored { get; set; } = false;
 

@@ -3,9 +3,10 @@ using FiveElements.Shared;
 
 namespace FiveElements.Shared.Models
 {
+    [System.Serializable]
     public class PlayerElementStats
     {
-        public ElementType MainElement { get; set; }
+        public ElementType MainElement { get; set; } = ElementType.None;
         
         // Current values and max limits for each element
         public int MetalValue { get; set; } = 0;
