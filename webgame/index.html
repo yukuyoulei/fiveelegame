@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五行元素冒险</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+
+        #gameContainer {
+            width: 480px;
+            height: 640px;
+            position: relative;
+            background: #87CEEB;
+            border: 4px solid #333;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        #gameCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #ui {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .coordinate-display {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 3px;
+            pointer-events: none;
+        }
+
+        .task-display {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 3px;
+            max-width: 200px;
+            pointer-events: none;
+        }
+
+        .inventory {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 3px;
+            pointer-events: none;
+        }
+
+        .skills {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 3px;
+            pointer-events: auto;
+        }
+
+        .health-bar {
+            position: absolute;
+            top: 40px;
+            left: 10px;
+            width: 150px;
+            height: 20px;
+            background: rgba(0,0,0,0.5);
+            border: 2px solid #333;
+            border-radius: 3px;
+        }
+
+        .health-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #ee5a24);
+            transition: width 0.3s ease;
+        }
+
+        .resource-bar {
+            position: absolute;
+            top: 70px;
+            left: 10px;
+            width: 150px;
+            height: 20px;
+            background: rgba(0,0,0,0.5);
+            border: 2px solid #333;
+            border-radius: 3px;
+        }
+
+        .resource-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4ecdc4, #44a08d);
+            transition: width 0.3s ease;
+        }
+
+        .floating-text {
+            position: absolute;
+            color: #ffeb3b;
+            font-size: 16px;
+            font-weight: bold;
+            pointer-events: none;
+            animation: floatUp 2s ease-out forwards;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+        }
+
+        .dialog-box {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            max-width: 400px;
+            text-align: center;
+            display: none;
+            pointer-events: auto;
+        }
+
+        .skill-panel {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            pointer-events: auto;
+            z-index: 20;
+        }
+
+        .skill-button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .skill-button:hover {
+            background: #45a049;
+        }
+
+        .breakthrough-panel {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            pointer-events: auto;
+            z-index: 20;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 20px;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid #fff;
+            border-radius: 3px;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+        <div id="ui">
+            <div class="coordinate-display" id="coordinates">坐标: (0, 0)</div>
+            <div class="task-display" id="taskDisplay">暂无任务</div>
+            <div class="inventory" id="inventory">背包: 空</div>
+            <div class="skills">
+                <button class="skill-button" onclick="game.showSkillPanel()">技能</button>
+            </div>
+            <div class="health-bar">
+                <div class="health-fill" id="healthFill" style="width: 100%"></div>
+            </div>
+            <div class="resource-bar">
+                <div class="resource-fill" id="resourceFill" style="width: 0%"></div>
+            </div>
+            <div class="dialog-box" id="dialogBox"></div>
+        </div>
+    </div>
+
+    <div class="skill-panel" id="skillPanel">
+        <h3>技能系统</h3>
+        <div id="skillInfo"></div>
+        <button class="skill-button" onclick="game.upgradeSkill('mind')">升级心法</button>
+        <button class="skill-button" onclick="game.upgradeSkill('body')">升级外功</button>
+        <button class="skill-button" onclick="game.closeSkillPanel()">关闭</button>
+    </div>
+
+    <div class="breakthrough-panel" id="breakthroughPanel">
+        <h3>突破</h3>
+        <p>等级: <span id="breakthroughLevel">0</span></p>
+        <p>消耗: <span id="breakthroughCost">0</span> 元素/秒</p>
+        <div class="progress-bar">
+            <div class="progress-fill" id="breakthroughProgress" style="width: 0%"></div>
+        </div>
+        <p>成功率: <span id="breakthroughChance">50</span>%</p>
+        <button class="skill-button" onclick="game.startBreakthrough()">开始突破</button>
+        <button class="skill-button" onclick="game.stopBreakthrough()">中断突破</button>
+        <button class="skill-button" onclick="game.closeBreakthroughPanel()">关闭</button>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
