@@ -112,15 +112,26 @@ namespace FiveElements.Shared.Services
             var harvestAmount = Math.Min(5, mineral.Value);
             if (mineral.Consume(harvestAmount))
             {
-                player.Elements.AddValue(mineral.ElementType!.Value, harvestAmount);
-                
-                return new HarvestResult
+                if (mineral.ElementType.HasValue)
                 {
-                    Success = true,
-                    ElementType = mineral.ElementType,
-                    Amount = harvestAmount,
-                    Message = $"成功采集了{harvestAmount}点{mineral.ElementType}"
-                };
+                    player.Elements.AddValue(mineral.ElementType.Value, harvestAmount);
+                    
+                    return new HarvestResult
+                    {
+                        Success = true,
+                        ElementType = mineral.ElementType.Value,
+                        Amount = harvestAmount,
+                        Message = $"成功采集了{harvestAmount}点{mineral.ElementType.Value}"
+                    };
+                }
+                else
+                {
+                    return new HarvestResult
+                    {
+                        Success = false,
+                        Message = "矿物没有元素类型"
+                    };
+                }
             }
 
             return new HarvestResult
