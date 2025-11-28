@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using FiveElements.Shared;
 using FiveElements.Unity.Managers;
 
 namespace FiveElements.Unity.Managers

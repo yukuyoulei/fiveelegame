@@ -35,6 +35,8 @@ namespace FiveElements.Unity.Managers
         private SkillManager _skillManager;
         private GameObject _playerInstance;
         
+        public SkillManager SkillManager => _skillManager;
+        
         private List<ResourceObject> _resources = new List<ResourceObject>();
         private List<MonsterObject> _monsters = new List<MonsterObject>();
         private List<NPCObject> _npcs = new List<NPCObject>();

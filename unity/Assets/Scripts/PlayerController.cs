@@ -173,7 +173,7 @@ namespace FiveElements.Unity
             _lastAttackTime = Time.time;
             
             // 计算伤害
-            int damage = 10 + (_gameManager.GetComponent<SkillManager>().GetBodyLevel() * 2);
+            int damage = 10 + (_gameManager.SkillManager.GetBodyLevel() * 2);
             
             // 造成伤害
             monster.TakeDamage(damage);
